@@ -1,21 +1,20 @@
 package sample;
 
+import javafx.animation.TranslateTransition;
+import javafx.scene.control.Label;
 import java.util.Random;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.effect.Effect;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.io.IOException;
 
 public class Game {
@@ -34,58 +33,68 @@ public class Game {
     ImageView dice_image6;
 
     @FXML
-    ImageView no_image;
-
-    @FXML
-    ImageView playe2_pic;
-
-    @FXML
-    ImageView playe1_pic;
-
-    @FXML
     Button roll_button;
-
     @FXML
-    Text p1;
-
-    @FXML
-    Text p2;
+    ImageView no_image;
 
     int count=0;
 
+    // Player's Information in the Game
+    @FXML
+    ImageView player2Picture;
+    @FXML
+    ImageView player1Picture;
+    @FXML
+    Text player1Text;
+    @FXML
+    Text player2Text;
+    @FXML
+    private ImageView player1Token;
+    @FXML
+    private ImageView player2Token;
+
+    // Player Instantiation
+    Player player1 ;
+    Player player2 ;
+
+    @FXML
+    private boolean ifPlayer1Turn(){
+        return count%2==0;
+    }
+
     public void btnROLLclicked(ActionEvent event) throws IOException
     {
-        p1.setText(Controller.getPlayerNames()[0]);
-        p1.setOpacity(1);
-        p2.setText(Controller.getPlayerNames()[1]);
-        p2.setOpacity(1);
+        player1.getPlayerText().setText(Controller.getPlayerNames()[0]);
+        player1.getPlayerText().setOpacity(1);
+        player2.getPlayerText().setText(Controller.getPlayerNames()[1]);
+        player2.getPlayerText().setOpacity(1);
         count++;
-        if(count%2==0)
-        {
-            p1.setFill(Color.WHITE);
+
+        if(ifPlayer1Turn()) {
+            player1.getPlayerText().setFill(Color.WHITE);
             Effect glow = new Glow(1.0);
-            p1.setEffect(glow);
-            p1.setUnderline(true);
+            player1.getPlayerText().setEffect(glow);
+            player1.getPlayerText().setUnderline(true);
             glow = new Glow(0.7);
-            playe1_pic.setEffect(glow);
+            player1.getPlayerPicture().setEffect(glow);
             glow = new Glow(0);
-            p2.setFill(Color.BLACK);
-            p2.setEffect(glow);
-            p2.setUnderline(false);
-            playe2_pic.setEffect(glow);
+            player2.getPlayerText().setFill(Color.BLACK);
+            player2.getPlayerText().setEffect(glow);
+            player2.getPlayerText().setUnderline(false);
+            player2.getPlayerPicture().setEffect(glow);
         }
         else {
-            p2.setFill(Color.WHITE);
+            player2.getPlayerText().setFill(Color.WHITE);
             Effect glow = new Glow(1.0);
-            p2.setUnderline(true);
-            p2.setEffect(glow);
+            player2.getPlayerText().setUnderline(true);
+            player2.getPlayerText().setEffect(glow);
             glow = new Glow(0.7);
-            playe2_pic.setEffect(glow);
+            player2.getPlayerPicture().setEffect(glow);
             glow = new Glow(0);
-            p1.setEffect(glow);
-            p1.setUnderline(false);
-            p1.setFill(Color.BLACK);
-            playe1_pic.setEffect(glow);
+            player1.getPlayerText().setEffect(glow);
+            player1.getPlayerText().setUnderline(false);
+            player1.getPlayerText().setFill(Color.BLACK);
+            player1.getPlayerPicture().setEffect(glow);
         }
 
         Random rand = new Random();
@@ -137,23 +146,70 @@ public class Game {
     @FXML
     public void initialize()
     {
-        String name_1=Controller.getPlayerNames()[0];
-        String name_2=Controller.getPlayerNames()[1];
-        p1.setText(name_1);
-        p1.setOpacity(1);
-        p2.setText(name_2);
-        p2.setOpacity(1);
-        p1.setFill(Color.WHITE);
+        String name_1 = Controller.getPlayerNames()[0];
+        String name_2 = Controller.getPlayerNames()[1];
+
+        // Instantiate Player 1 and 2;
+        player1 = new Player(player1Token, player1Picture, player1Text);
+        player2 = new Player(player2Token, player2Picture, player2Text);
+
+        player1.getPlayerText().setText(name_1);
+        player1.getPlayerText().setOpacity(1);
+        player2.getPlayerText().setText(name_2);
+        player2.getPlayerText().setOpacity(1);
+        player1.getPlayerText().setFill(Color.WHITE);
         Effect glow = new Glow(1.0);
-        p1.setEffect(glow);
-        p1.setUnderline(true);
+        player1.getPlayerText().setEffect(glow);
+        player1.getPlayerText().setUnderline(true);
         glow = new Glow(0.7);
-        playe1_pic.setEffect(glow);
+        player1.getPlayerPicture().setEffect(glow);
         glow = new Glow(0);
-        p2.setFill(Color.BLACK);
-        p2.setEffect(glow);
-        p2.setUnderline(false);
-        playe2_pic.setEffect(glow);
+        player2.getPlayerText().setFill(Color.BLACK);
+        player2.getPlayerText().setEffect(glow);
+        player2.getPlayerText().setUnderline(false);
+        player2.getPlayerPicture().setEffect(glow);
+
+        // remove this line below later
+        player1.setPlayerXLocation(55);
     }
 
+
+
+
+    // used as helper
+    @FXML
+    private Label labelLocationXandY;
+    private double targetX, targetY;
+    private double player1X = 0;
+    private double player1Y = 0;
+    private double player2X = 0;
+    private double player2Y = 0;
+
+
+    @FXML
+    void translateLocationOfPlayer(double amountByX, double amountByY, ImageView player){
+        TranslateTransition animate = new TranslateTransition(Duration.millis(800), player);
+        animate.setToX(amountByX);
+        animate.setToY(amountByY);
+        animate.setAutoReverse(false);
+        animate.play();
+    }
+
+    @FXML
+    void getLocationAndSetLocationOfButton(MouseEvent event) {
+        targetX = event.getSceneX();
+        targetY = event.getSceneY();
+        System.out.println("Target : "+targetX+",  "+targetY);
+
+//        labelLocationXandY.setOpacity(1);
+//        labelLocationXandY.setText("X="+targetX+", Y="+targetY);
+
+        //player1X += 55;
+        //player1.setPlayerXLocation(player1.getPlayerXLocation()+55);
+        player1.movePLayer(1);
+        //player1.translateLocationOfPlayer();
+        //translateLocationOfPlayer(player1X,player1Y,player1Token);
+
+
+    }
 }
