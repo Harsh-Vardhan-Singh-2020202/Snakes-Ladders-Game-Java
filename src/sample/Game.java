@@ -53,17 +53,23 @@ public class Game {
     @FXML
     private ImageView player2Token;
 
+
     // Player Instantiation
     Player player1 ;
     Player player2 ;
+    Ladder ladder;
+    Snake snake;
+    Die die;
 
-    @FXML
+
     private boolean ifPlayer1Turn(){
-        return count%2==0;
+        return count%2==1;
+    }
+    private boolean ifPlayer2Turn(){
+        return (count!=0) && (count%2==0);
     }
 
-    public void btnROLLclicked(ActionEvent event) throws IOException
-    {
+    public void rollButtonClicked(ActionEvent event) {
         player1.getPlayerText().setText(Controller.getPlayerNames()[0]);
         player1.getPlayerText().setOpacity(1);
         player2.getPlayerText().setText(Controller.getPlayerNames()[1]);
@@ -75,7 +81,7 @@ public class Game {
             Effect glow = new Glow(1.0);
             player1.getPlayerText().setEffect(glow);
             player1.getPlayerText().setUnderline(true);
-            glow = new Glow(0.7);
+            glow = new Glow(1);
             player1.getPlayerPicture().setEffect(glow);
             glow = new Glow(0);
             player2.getPlayerText().setFill(Color.BLACK);
@@ -88,7 +94,7 @@ public class Game {
             Effect glow = new Glow(1.0);
             player2.getPlayerText().setUnderline(true);
             player2.getPlayerText().setEffect(glow);
-            glow = new Glow(0.7);
+            glow = new Glow(1);
             player2.getPlayerPicture().setEffect(glow);
             glow = new Glow(0);
             player1.getPlayerText().setEffect(glow);
@@ -97,37 +103,52 @@ public class Game {
             player1.getPlayerPicture().setEffect(glow);
         }
 
-        Random rand = new Random();
-        int rand_int1 = rand.nextInt(6);
-        if(rand_int1==0)
-        {
+        die.roll();
+        int diceFaceValue = die.getFaceValue();
+        if(diceFaceValue==1) {
             Image dice_1 =dice_image1.getImage();
             no_image.setImage(dice_1);
         }
-        else if(rand_int1==1)
-        {
+        else if(diceFaceValue==2) {
             Image dice_2 =dice_image2.getImage();
             no_image.setImage(dice_2);
         }
-        else if(rand_int1==2)
-        {
+        else if(diceFaceValue==3) {
             Image dice_3 =dice_image3.getImage();
             no_image.setImage(dice_3);
         }
-        else if(rand_int1==3)
-        {
+        else if(diceFaceValue==4) {
             Image dice_4 =dice_image4.getImage();
             no_image.setImage(dice_4);
         }
-        else if(rand_int1==4)
-        {
+        else if(diceFaceValue==5) {
             Image dice_5 =dice_image5.getImage();
             no_image.setImage(dice_5);
         }
-        else if(rand_int1==5)
-        {
+        else if(diceFaceValue==6) {
             Image dice_6 =dice_image6.getImage();
             no_image.setImage(dice_6);
+        }
+
+        if (ifPlayer1Turn()){
+            if (player1.isPlayerGameStarted()){
+                player1.movePLayer(diceFaceValue,ladder,snake);
+            }
+        }
+        else if (ifPlayer2Turn()){
+            if (player2.isPlayerGameStarted()){
+                player2.movePLayer(diceFaceValue,ladder,snake);
+            }
+        }
+        if ((ifPlayer1Turn()) && (!player1.isPlayerGameStarted()) && (diceFaceValue==1)) {
+            player1.setPlayerGameStarted(true);
+            player1.setPlayerXLocation(55);
+            player1.translateLocationOfPlayer();
+        }
+        else if ((ifPlayer2Turn()) && (!player2.isPlayerGameStarted()) && (diceFaceValue==1)) {
+            player2.setPlayerGameStarted(true);
+            player2.setPlayerXLocation(55);
+            player2.translateLocationOfPlayer();
         }
     }
 
@@ -144,18 +165,17 @@ public class Game {
     }
 
     @FXML
-    public void initialize()
-    {
-        String name_1 = Controller.getPlayerNames()[0];
-        String name_2 = Controller.getPlayerNames()[1];
-
+    public void initialize() {
         // Instantiate Player 1 and 2;
         player1 = new Player(player1Token, player1Picture, player1Text);
         player2 = new Player(player2Token, player2Picture, player2Text);
+        ladder = new Ladder();
+        snake = new Snake();
+        die = new Die();
 
-        player1.getPlayerText().setText(name_1);
+        player1.getPlayerText().setText(Controller.getPlayerNames()[0]);
         player1.getPlayerText().setOpacity(1);
-        player2.getPlayerText().setText(name_2);
+        player2.getPlayerText().setText(Controller.getPlayerNames()[1]);
         player2.getPlayerText().setOpacity(1);
         player1.getPlayerText().setFill(Color.WHITE);
         Effect glow = new Glow(1.0);
@@ -168,9 +188,6 @@ public class Game {
         player2.getPlayerText().setEffect(glow);
         player2.getPlayerText().setUnderline(false);
         player2.getPlayerPicture().setEffect(glow);
-
-        // remove this line below later
-        player1.setPlayerXLocation(55);
     }
 
 
@@ -185,31 +202,4 @@ public class Game {
     private double player2X = 0;
     private double player2Y = 0;
 
-
-    @FXML
-    void translateLocationOfPlayer(double amountByX, double amountByY, ImageView player){
-        TranslateTransition animate = new TranslateTransition(Duration.millis(800), player);
-        animate.setToX(amountByX);
-        animate.setToY(amountByY);
-        animate.setAutoReverse(false);
-        animate.play();
-    }
-
-    @FXML
-    void getLocationAndSetLocationOfButton(MouseEvent event) {
-        targetX = event.getSceneX();
-        targetY = event.getSceneY();
-        System.out.println("Target : "+targetX+",  "+targetY);
-
-//        labelLocationXandY.setOpacity(1);
-//        labelLocationXandY.setText("X="+targetX+", Y="+targetY);
-
-        //player1X += 55;
-        //player1.setPlayerXLocation(player1.getPlayerXLocation()+55);
-        player1.movePLayer(1);
-        //player1.translateLocationOfPlayer();
-        //translateLocationOfPlayer(player1X,player1Y,player1Token);
-
-
-    }
 }

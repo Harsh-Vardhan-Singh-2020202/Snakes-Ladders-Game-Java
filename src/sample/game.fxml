@@ -14,12 +14,12 @@
             <Image url="@assets/backdrop.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="555.0" fitWidth="636.0" layoutX="72.0" layoutY="26.0" onMouseClicked="#getLocationAndSetLocationOfButton" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="555.0" fitWidth="636.0" layoutX="72.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/BOARD.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="roll_button" layoutX="319.0" layoutY="648.0" mnemonicParsing="false" onAction="#btnROLLclicked" onMouseEntered="#setButtonSkin" onMouseExited="#removeButtonSkin" text="ROLL" textAlignment="CENTER">
+      <Button fx:id="roll_button" layoutX="319.0" layoutY="648.0" mnemonicParsing="false" onAction="#rollButtonClicked" onMouseEntered="#setButtonSkin" onMouseExited="#removeButtonSkin" text="ROLL" textAlignment="CENTER">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
