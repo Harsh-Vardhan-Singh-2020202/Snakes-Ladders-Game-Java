@@ -2,7 +2,10 @@ package sample;
 
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -192,18 +195,19 @@ public class Player {
                 }
             }
 
-            else if ((playerYLocation==-495) && (playerXLocation>=55 && playerXLocation<=550)){
-                if ((playerYLocation==-495) && (playerXLocation==55) && (i==byAmount)){
-                    playerWon = true;
-                    translateLocationOfPlayer();
-                }
-                else {
-                    playerXLocation -= 55;
-                    translateLocationOfPlayer();
-                }
-                if ((playerYLocation==-495) && (playerXLocation==110) && (i==byAmount)){
-                    snake.bitePlayer(this,55,-220);
-                    translateLocationOfPlayer();
+            if ((byAmount*55)<=(playerXLocation-55)) {
+                if ((playerYLocation == -495) && (playerXLocation >= 55 && playerXLocation <= 550)) {
+                    if ((playerYLocation == -495) && (playerXLocation == 55) && (i == byAmount)) {
+                        playerWon = true;
+                        translateLocationOfPlayer();
+                    } else {
+                        playerXLocation -= 55;
+                        translateLocationOfPlayer();
+                    }
+                    if ((playerYLocation == -495) && (playerXLocation == 110) && (i == byAmount)) {
+                        snake.bitePlayer(this, 55, -220);
+                        translateLocationOfPlayer();
+                    }
                 }
             }
         }
@@ -216,6 +220,31 @@ public class Player {
         animate.setToY(playerYLocation);
         animate.setAutoReverse(false);
         animate.play();
+    }
+
+    public void rollDie(Die die){
+        die.roll();
+    }
+
+    public void glowPlayerToken(){
+        Effect glow = new Glow(1.0);
+        playerText.setFill(Color.WHITE);
+        playerText.setEffect(glow);
+        playerText.setUnderline(true);
+        playerText.setOpacity(1);
+        playerPicture.setEffect(glow);
+        glow = new Glow(0.8);
+        playerToken.setEffect(glow);
+    }
+
+    public void dimPlayerToken(){
+        Effect glow = new Glow(0);
+        playerText.setFill(Color.BLACK);
+        playerText.setEffect(glow);
+        playerText.setUnderline(false);
+        playerText.setOpacity(1);
+        playerPicture.setEffect(glow);
+        playerToken.setEffect(glow);
     }
 
     public boolean isPlayerWon() {
