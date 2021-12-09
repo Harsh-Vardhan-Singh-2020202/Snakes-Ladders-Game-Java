@@ -252,20 +252,8 @@ public class Player {
         return playerWon;
     }
 
-    public ImageView getPlayerToken() {
-        return playerToken;
-    }
-
-    public double getPlayerXLocation() {
-        return playerXLocation;
-    }
-
     public void setPlayerXLocation(double playerXLocation) {
         this.playerXLocation = playerXLocation;
-    }
-
-    public double getPlayerYLocation() {
-        return playerYLocation;
     }
 
     public void setPlayerYLocation(double playerYLocation) {
@@ -280,24 +268,8 @@ public class Player {
         this.playerGameStarted = playerGameStarted;
     }
 
-    public void setPlayerToken(ImageView playerToken) {
-        this.playerToken = playerToken;
-    }
-
-    public ImageView getPlayerPicture() {
-        return playerPicture;
-    }
-
-    public void setPlayerPicture(ImageView playerPicture) {
-        this.playerPicture = playerPicture;
-    }
-
     public Text getPlayerText() {
         return playerText;
-    }
-
-    public void setPlayerText(Text playerText) {
-        this.playerText = playerText;
     }
 
     @Override

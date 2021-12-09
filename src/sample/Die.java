@@ -39,23 +39,17 @@ public class Die {
 
     public void setDiceFaceImage(int faceValue){
         if (faceValue == 1) {
-            Image dice_1 = dice_image1.getImage();
-            diceFaceImage.setImage(dice_1);
+            diceFaceImage.setImage(dice_image1.getImage());
         } else if (faceValue == 2) {
-            Image dice_2 = dice_image2.getImage();
-            diceFaceImage.setImage(dice_2);
+            diceFaceImage.setImage(dice_image2.getImage());
         } else if (faceValue == 3) {
-            Image dice_3 = dice_image3.getImage();
-            diceFaceImage.setImage(dice_3);
+            diceFaceImage.setImage(dice_image3.getImage());
         } else if (faceValue == 4) {
-            Image dice_4 = dice_image4.getImage();
-            diceFaceImage.setImage(dice_4);
+            diceFaceImage.setImage(dice_image4.getImage());
         } else if (faceValue == 5) {
-            Image dice_5 = dice_image5.getImage();
-            diceFaceImage.setImage(dice_5);
+            diceFaceImage.setImage(dice_image5.getImage());
         } else if (faceValue == 6) {
-            Image dice_6 = dice_image6.getImage();
-            diceFaceImage.setImage(dice_6);
+            diceFaceImage.setImage(dice_image6.getImage());
         }
     }
 }

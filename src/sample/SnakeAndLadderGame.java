@@ -100,7 +100,7 @@ public class SnakeAndLadderGame {
                 else
                     System.out.println("Player 2 Won");
 
-                // ADD CODE FOR POP-UP WINDOW HERE !!!
+                // ADD CODE FOR POP-UP WINDOW FOR THE WINNER HERE !!!
             }
             count++;
         }
