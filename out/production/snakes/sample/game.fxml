@@ -34,7 +34,7 @@
             <Image url="@assets/token2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="no_image" fitHeight="50.0" fitWidth="50.0" layoutX="324.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="diceFaceImage" fitHeight="50.0" fitWidth="50.0" layoutX="324.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/what.png" />
          </image>
@@ -85,12 +85,12 @@
             <Image url="@assets/bar.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="player1Token" fitHeight="39.0" fitWidth="41.0" layoutX="33.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player1Token" fitHeight="45.0" fitWidth="45.0" layoutX="27.0" layoutY="536.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/token1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="player2Token" fitHeight="39.0" fitWidth="39.0" layoutX="14.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player2Token" fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/token2.png" />
          </image>

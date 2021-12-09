@@ -30,6 +30,8 @@ public class Player {
 
     @FXML
     public void movePLayer(int byAmount, Ladder ladder, Snake snake){
+        double initialXPosition = playerXLocation;
+
         for (int i=1; i<=byAmount; i++){
 
             if ((playerYLocation==0) && (playerXLocation>=55 && playerXLocation<=550)){
@@ -78,7 +80,7 @@ public class Player {
             }
 
             else if ((playerYLocation==-165) && (playerXLocation>=55 && playerXLocation<=550)){
-                if ((playerYLocation==-165) && (playerXLocation==55) && (i==byAmount)){
+                if ((playerYLocation==-165) && (playerXLocation==55) && (i==byAmount) && (((initialXPosition-55)/55)==byAmount)){
                     snake.bitePlayer(this,165,0);
                     translateLocationOfPlayer();
                 }
@@ -94,14 +96,14 @@ public class Player {
                     ladder.movePlayerUp(this,495,-220);
                     translateLocationOfPlayer();
                 }
-                else if ((playerYLocation==-165) && (playerXLocation==55) && (i==byAmount)){
+                else if ((playerYLocation==-165) && (playerXLocation==55) && (i==byAmount) && (((initialXPosition-55)/55)==byAmount)){
                     snake.bitePlayer(this,165,0);
                     translateLocationOfPlayer();
                 }
             }
 
             else if ((playerYLocation==-220) && (playerXLocation>=55 && playerXLocation<=550)){
-                if ((playerYLocation==-220) && (playerXLocation==550) && (i==byAmount)){
+                if ((playerYLocation==-220) && (playerXLocation==550) && (i==byAmount) && (((550-initialXPosition)/55)==byAmount)){
                     ladder.movePlayerUp(this,495,-330);
                     translateLocationOfPlayer();
                 }
@@ -117,7 +119,7 @@ public class Player {
                     ladder.movePlayerUp(this,165,-330);
                     translateLocationOfPlayer();
                 }
-                else if ((playerYLocation==-220) && (playerXLocation==550) && (i==byAmount)){
+                else if ((playerYLocation==-220) && (playerXLocation==550) && (i==byAmount) && (((550-initialXPosition)/55)==byAmount)){
                     ladder.movePlayerUp(this,495,-330);
                     translateLocationOfPlayer();
                 }
@@ -195,22 +197,21 @@ public class Player {
                 }
             }
 
-            if ((byAmount*55)<=(playerXLocation-55)) {
-                if ((playerYLocation == -495) && (playerXLocation >= 55 && playerXLocation <= 550)) {
-                    if ((playerYLocation == -495) && (playerXLocation == 55) && (i == byAmount)) {
-                        playerWon = true;
-                        translateLocationOfPlayer();
-                    } else {
-                        playerXLocation -= 55;
-                        translateLocationOfPlayer();
-                    }
-                    if ((playerYLocation == -495) && (playerXLocation == 110) && (i == byAmount)) {
-                        snake.bitePlayer(this, 55, -220);
-                        translateLocationOfPlayer();
-                    }
+            else if (((byAmount*55)<=(initialXPosition-55)) && (playerYLocation == -495) && (playerXLocation >= 55 && playerXLocation <= 550)) {
+                playerXLocation -= 55;
+                translateLocationOfPlayer();
+                if ((playerYLocation == -495) && (playerXLocation == 55) && (i == byAmount) && (((initialXPosition-55)/55)==byAmount)) {
+                    playerWon = true;
+                    System.out.println("Won...");
+                    translateLocationOfPlayer();
+                }
+                if ((playerYLocation == -495) && (playerXLocation == 110) && (i == byAmount)) {
+                    snake.bitePlayer(this, 55, -220);
+                    translateLocationOfPlayer();
                 }
             }
         }
+
     }
 
     @FXML
