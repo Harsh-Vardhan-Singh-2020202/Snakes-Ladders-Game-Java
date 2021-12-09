@@ -4,11 +4,10 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Glow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
-public class Game {
+public class SnakeAndLadderGame {
 
     @FXML
     ImageView dice_image1;
@@ -30,7 +29,7 @@ public class Game {
 
     static int count=2;
 
-    // Player's Information in the Game
+    // Player's Information in the SnakeAndLadderGame
     @FXML
     ImageView player2Picture;
     @FXML
@@ -128,8 +127,8 @@ public class Game {
         snake = new Snake();
         die = new Die(6,diceFaceImage,dice_image1,dice_image2,dice_image3,dice_image4,dice_image5,dice_image6);
 
-        player1.getPlayerText().setText(Controller.getPlayerNames()[0]);
-        player2.getPlayerText().setText(Controller.getPlayerNames()[1]);
+        player1.getPlayerText().setText(MainWindow.getPlayerNames()[0]);
+        player2.getPlayerText().setText(MainWindow.getPlayerNames()[1]);
         count = 0;
         player1.glowPlayerToken();
         player2.dimPlayerToken();

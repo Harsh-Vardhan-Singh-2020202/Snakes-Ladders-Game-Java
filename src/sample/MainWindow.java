@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Controller {
+public class MainWindow {
 
     public static String[] getPlayerNames() {
         return playerNames;
