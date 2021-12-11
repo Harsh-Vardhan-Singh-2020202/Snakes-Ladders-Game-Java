@@ -17,6 +17,7 @@ public class Player {
     @FXML
     private Text playerText;
 
+    private String name;
     private double playerXLocation = 0;
     private double playerYLocation = 0;
     private boolean playerGameStarted = false;
@@ -197,7 +198,11 @@ public class Player {
                 }
             }
 
-            else if (((byAmount*55)<=(initialXPosition-55)) && (playerYLocation == -495) && (playerXLocation >= 55 && playerXLocation <= 550)) {
+            else if ((playerYLocation == -495) && (playerXLocation >= 385 && playerXLocation <= 550)) {
+                playerXLocation -= 55;
+                translateLocationOfPlayer();
+            }
+            else if ((playerYLocation == -495) && (playerXLocation >= 55 && playerXLocation <= 385) && ((byAmount*55)<=(initialXPosition-55))) {
                 playerXLocation -= 55;
                 translateLocationOfPlayer();
                 if ((playerYLocation == -495) && (playerXLocation == 55) && (i == byAmount) && (((initialXPosition-55)/55)==byAmount)) {
@@ -229,7 +234,7 @@ public class Player {
 
     public void glowPlayerToken(){
         Effect glow = new Glow(1.0);
-        playerText.setFill(Color.WHITE);
+        playerText.setFill(Color.YELLOW);
         playerText.setEffect(glow);
         playerText.setUnderline(true);
         playerText.setOpacity(1);
@@ -246,6 +251,11 @@ public class Player {
         playerText.setOpacity(1);
         playerPicture.setEffect(glow);
         playerToken.setEffect(glow);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+        this.playerText.setText(name);
     }
 
     public boolean isPlayerWon() {
@@ -266,10 +276,6 @@ public class Player {
 
     public void setPlayerGameStarted(boolean playerGameStarted) {
         this.playerGameStarted = playerGameStarted;
-    }
-
-    public Text getPlayerText() {
-        return playerText;
     }
 
     @Override

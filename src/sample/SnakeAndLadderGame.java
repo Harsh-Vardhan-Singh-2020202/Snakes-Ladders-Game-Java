@@ -127,8 +127,8 @@ public class SnakeAndLadderGame {
         snake = new Snake();
         die = new Die(6,diceFaceImage,dice_image1,dice_image2,dice_image3,dice_image4,dice_image5,dice_image6);
 
-        player1.getPlayerText().setText(MainWindow.getPlayerNames()[0]);
-        player2.getPlayerText().setText(MainWindow.getPlayerNames()[1]);
+        player1.setName(MainWindow.getPlayerNames()[0]);
+        player2.setName(MainWindow.getPlayerNames()[1]);
         count = 0;
         player1.glowPlayerToken();
         player2.dimPlayerToken();
