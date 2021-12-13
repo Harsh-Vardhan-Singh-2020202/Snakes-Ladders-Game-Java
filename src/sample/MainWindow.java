@@ -34,6 +34,8 @@ public class MainWindow {
     @FXML
     private TextField tfTitle2;
 
+    Stage snakeAndLadderGame;
+
     @FXML
     void btnOKclicked(ActionEvent event) throws IOException
     {
@@ -49,15 +51,15 @@ public class MainWindow {
 
         playerNames[0] = title1;
         playerNames[1] = title2;
-        Stage game = new Stage();
+        snakeAndLadderGame= new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("game.fxml"));
         Image image = new Image(getClass().getResource("assets/snake.png").toExternalForm());
-        game.getIcons().add(image);
-        game.setTitle(title1+" vs "+title2);
+        snakeAndLadderGame.getIcons().add(image);
+        snakeAndLadderGame.setTitle(title1+" vs "+title2);
         playerNames[0] = title1;
         playerNames[1] = title2;
-        game.setScene(new Scene(root));
-        game.show();
+        snakeAndLadderGame.setScene(new Scene(root));
+        snakeAndLadderGame.show();
     }
 
     public void setButtonSkin(){
