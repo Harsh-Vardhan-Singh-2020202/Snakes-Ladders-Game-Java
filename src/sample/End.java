@@ -5,6 +5,7 @@ import javafx.scene.text.Text;
 
 public class End
 {
+
     @FXML
     Text winner;
 
@@ -14,7 +15,10 @@ public class End
     @FXML
     public void initialize()
     {
-
+        String[] names;
+        names=SnakeAndLadderGame.return_names();
+        winner.setText(names[0]);
+        looser.setText(names[1]);
     }
 }
 

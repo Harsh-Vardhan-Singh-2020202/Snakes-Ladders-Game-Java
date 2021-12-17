@@ -260,6 +260,11 @@ public class Player {
         playerToken.setEffect(glow);
     }
 
+    public String getName()
+    {
+        return name;
+    }
+
     public boolean isPlayerWon() {
         return playerWon;
     }

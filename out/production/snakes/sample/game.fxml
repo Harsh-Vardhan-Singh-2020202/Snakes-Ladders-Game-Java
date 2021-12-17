@@ -29,7 +29,7 @@
             <Image url="@assets/token1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="player2Picture" fitHeight="60.0" fitWidth="60.0" layoutX="587.0" layoutY="598.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player2Picture" fitHeight="60.0" fitWidth="60.0" layoutX="587.0" layoutY="598.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/token2.png" />
          </image>
@@ -93,6 +93,16 @@
       <ImageView fx:id="player2Token" fitHeight="45.0" fitWidth="45.0" layoutX="14.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/token2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="452.0" fitWidth="75.0" layoutX="627.0" layoutY="78.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
+         <image>
+            <Image url="@assets/moving_ladder.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="452.0" fitWidth="75.0" layoutX="-1.0" layoutY="78.0" pickOnBounds="true">
+         <image>
+            <Image url="@assets/moving_ladder.gif" />
          </image>
       </ImageView>
    </children>

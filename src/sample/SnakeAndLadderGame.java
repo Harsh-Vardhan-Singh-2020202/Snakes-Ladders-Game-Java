@@ -52,8 +52,8 @@ public class SnakeAndLadderGame {
 
 
     // Player Instantiation
-    Player player1 ;
-    Player player2 ;
+    static Player player1 ;
+    static Player player2 ;
     Ladder ladder;
     Snake snake;
     Die die;
@@ -117,6 +117,21 @@ public class SnakeAndLadderGame {
         }
     }
 
+    public static String[] return_names()
+    {
+        String[] win_loose = new String[2];
+        if (player1.isPlayerWon())
+        {
+            win_loose[0] = player1.getName();
+            win_loose[1] = player2.getName();
+        }
+        else
+        {
+            win_loose[1] = player1.getName();
+            win_loose[0] = player2.getName();
+        }
+        return win_loose;
+    }
     public void setButtonSkin(){
         Glow glow = new Glow();
         glow.setLevel(0.8);
