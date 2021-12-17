@@ -108,10 +108,12 @@ public class SnakeAndLadderGame {
                 else
                     System.out.println("Player 2 Won");
 
+                Stage mainWindow = (Stage) roll_button.getScene().getWindow();
                 endGame = new Stage();            // End can be made as composition in the Game
                 Parent root = FXMLLoader.load(getClass().getResource("end.fxml"));
                 endGame.setScene(new Scene(root));
                 endGame.show();
+                mainWindow.close();
             }
             count++;
         }
